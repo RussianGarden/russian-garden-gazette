@@ -25,12 +25,21 @@ anything else.
 Social preview images are the one exception: Facebook cannot read an
 image embedded in a page, so those two stay as separate files.
 
+## Where the "current issue" is defined
+
+The bare domain redirects to the newest issue. That redirect lives in
+`netlify.toml` — change the `to =` lines there and nothing else decides it.
+`index.html` carries the same target as a fallback, so update it too.
+
+`/current` and `/current-ru` are permanent shortcuts that always resolve to
+the newest issue; they are safe to print or share.
+
 ## Publishing a new issue
 
 1. Add `issue-10-en.html` and `issue-10-ru.html`.
 2. Add cards for them in `archive.html` and `archive-ru.html`, and move
    the "Current issue" label.
-3. Update the redirect in `index.html`.
+3. Update the redirect targets in `netlify.toml` (four lines) and in `index.html`.
 4. Commit with a message naming the issue. Netlify deploys within a minute.
 
 ## The rule that keeps this an archive

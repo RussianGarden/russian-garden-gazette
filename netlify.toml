@@ -1,6 +1,50 @@
+# ============================================================================
+#  The Russian Garden Gazette — Netlify configuration
+#
+#  WHEN YOU PUBLISH A NEW ISSUE, change the two "to =" lines below.
+#  That is the only place the current issue is named.
+# ============================================================================
+
 [build]
   publish = "."
   command = ""
+
+# ---------------------------------------------------------------- redirects --
+# The bare domain sends the reader to the current issue.
+# force = true is required: without it Netlify serves index.html instead.
+# 302 (temporary) is deliberate — a 301 would be cached by browsers forever
+# and would keep sending people to this issue after the next one appears.
+
+# Russian-speaking browsers get the Russian edition.
+[[redirects]]
+  from = "/"
+  to = "/issue-11-ru.html"
+  status = 302
+  force = true
+  conditions = {Language = ["ru"]}
+
+# Everyone else gets the English edition.
+[[redirects]]
+  from = "/"
+  to = "/issue-11-en.html"
+  status = 302
+  force = true
+
+# A permanent shortcut that always points at whatever is newest.
+# Safe to print or share: /current never has to change.
+[[redirects]]
+  from = "/current"
+  to = "/issue-11-en.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/current-ru"
+  to = "/issue-11-ru.html"
+  status = 302
+  force = true
+
+# ------------------------------------------------------------------ headers --
 
 [[headers]]
   for = "/*"
@@ -8,4 +52,15 @@
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Cache-Control = "public, max-age=3600"
+
+# Pages are revalidated on every visit, so a corrected issue appears at once.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Social preview images change rarely.
+[[headers]]
+  for = "/og-*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
