@@ -1,8 +1,9 @@
 # ============================================================================
 #  The Russian Garden Gazette — Netlify configuration
 #
-#  WHEN YOU PUBLISH A NEW ISSUE, change the two "to =" lines below.
-#  That is the only place the current issue is named.
+#  THE CURRENT ISSUE IS NAMED ONLY HERE AND IN index.html.
+#  When you publish a new issue, change "12" to the new number below,
+#  and change the same number in index.html.
 # ============================================================================
 
 [build]
@@ -10,37 +11,35 @@
   command = ""
 
 # ---------------------------------------------------------------- redirects --
-# The bare domain sends the reader to the current issue.
-# force = true is required: without it Netlify serves index.html instead.
-# 302 (temporary) is deliberate — a 301 would be cached by browsers forever
-# and would keep sending people to this issue after the next one appears.
+# force = true is REQUIRED. Without it Netlify serves index.html instead of
+# redirecting, and the root keeps showing whatever that old file points at.
+# 302 (temporary) is deliberate: a 301 is cached by browsers permanently and
+# would keep sending returning readers to this issue after the next appears.
 
-# Russian-speaking browsers get the Russian edition.
 [[redirects]]
   from = "/"
-  to = "/issue-11-ru.html"
+  to = "/issue-12-ru.html"
   status = 302
   force = true
   conditions = {Language = ["ru"]}
 
-# Everyone else gets the English edition.
 [[redirects]]
   from = "/"
-  to = "/issue-11-en.html"
+  to = "/issue-12-en.html"
   status = 302
   force = true
 
-# A permanent shortcut that always points at whatever is newest.
-# Safe to print or share: /current never has to change.
+# Permanent shortcuts that always resolve to the newest issue.
+# Safe to print or share: /current never changes.
 [[redirects]]
   from = "/current"
-  to = "/issue-11-en.html"
+  to = "/issue-12-en.html"
   status = 302
   force = true
 
 [[redirects]]
   from = "/current-ru"
-  to = "/issue-11-ru.html"
+  to = "/issue-12-ru.html"
   status = 302
   force = true
 
@@ -53,13 +52,13 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-# Pages are revalidated on every visit, so a corrected issue appears at once.
+# Pages revalidate on every visit so corrections appear at once, and so a
+# stale root page can never be served from a browser cache.
 [[headers]]
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Social preview images change rarely.
 [[headers]]
   for = "/og-*.jpg"
   [headers.values]
