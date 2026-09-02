@@ -1,9 +1,11 @@
 # ============================================================================
 #  The Russian Garden Gazette — Netlify configuration
 #
-#  THE CURRENT ISSUE IS NAMED ONLY HERE AND IN index.html.
-#  When you publish a new issue, change "12" to the new number below,
-#  and change the same number in index.html.
+#  >>> THIS IS THE ONLY FILE THAT NAMES THE CURRENT ISSUE. <<<
+#
+#  To publish a new issue: upload the new issue files, then change the
+#  four issue numbers below. Nothing else needs editing.
+#  index.html is a plain list of issues and never has to change.
 # ============================================================================
 
 [build]
@@ -12,20 +14,19 @@
 
 # ---------------------------------------------------------------- redirects --
 # force = true is REQUIRED. Without it Netlify serves index.html instead of
-# redirecting, and the root keeps showing whatever that old file points at.
-# 302 (temporary) is deliberate: a 301 is cached by browsers permanently and
-# would keep sending returning readers to this issue after the next appears.
+# redirecting. 302 (temporary) is deliberate: a 301 is cached by browsers
+# permanently and would keep sending readers to this issue forever.
 
 [[redirects]]
   from = "/"
-  to = "/issue-12-ru.html"
+  to = "/issue-13-ru.html"
   status = 302
   force = true
   conditions = {Language = ["ru"]}
 
 [[redirects]]
   from = "/"
-  to = "/issue-12-en.html"
+  to = "/issue-13-en.html"
   status = 302
   force = true
 
@@ -33,13 +34,13 @@
 # Safe to print or share: /current never changes.
 [[redirects]]
   from = "/current"
-  to = "/issue-12-en.html"
+  to = "/issue-13-en.html"
   status = 302
   force = true
 
 [[redirects]]
   from = "/current-ru"
-  to = "/issue-12-ru.html"
+  to = "/issue-13-ru.html"
   status = 302
   force = true
 
@@ -52,8 +53,6 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-# Pages revalidate on every visit so corrections appear at once, and so a
-# stale root page can never be served from a browser cache.
 [[headers]]
   for = "/*.html"
   [headers.values]
@@ -63,3 +62,8 @@
   for = "/og-*.jpg"
   [headers.values]
     Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/*.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
