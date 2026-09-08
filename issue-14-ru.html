@@ -1708,8 +1708,33 @@ blockquote.pull cite {
 /* two portraits side by side: photograph and painted portrait */
 .docs2 img { padding: 0.45rem; }
 
-/* the Forum of Minds block carries a link, so give it a touch more weight */
-.idea__note a { font-weight: 400; }
+/* The generic `.idea p` rule (one class + one element) outranks `.idea__lead`
+   and `.idea__note` (one class), so both italic lines were being flattened to
+   1rem regardless of the sizes declared for them. Restore the intended sizes
+   with matching specificity, and give Cormorant italic a little more weight
+   and brightness — its thin strokes disappear against the dark green. */
+.idea p.idea__lead {
+  font-size: clamp(1.35rem, 3.2vw, 1.62rem);
+  line-height: 1.55;
+  font-weight: 500;
+  color: #f7f0dc;
+}
+
+.idea p.idea__note {
+  font-size: clamp(1.12rem, 2.6vw, 1.3rem);
+  line-height: 1.6;
+  font-weight: 500;
+  color: #f7f0dc;
+}
+
+.idea a {
+  color: #f7f0dc;
+  font-weight: 500;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.idea a:hover { color: #ffffff; }
 </style>
 </head>
 
