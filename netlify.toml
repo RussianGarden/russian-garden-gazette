@@ -19,14 +19,14 @@
 
 [[redirects]]
   from = "/"
-  to = "/issue-13-ru.html"
+  to = "/issue-14-ru.html"
   status = 302
   force = true
   conditions = {Language = ["ru"]}
 
 [[redirects]]
   from = "/"
-  to = "/issue-13-en.html"
+  to = "/issue-14-en.html"
   status = 302
   force = true
 
@@ -34,13 +34,13 @@
 # Safe to print or share: /current never changes.
 [[redirects]]
   from = "/current"
-  to = "/issue-13-en.html"
+  to = "/issue-14-en.html"
   status = 302
   force = true
 
 [[redirects]]
   from = "/current-ru"
-  to = "/issue-13-ru.html"
+  to = "/issue-14-ru.html"
   status = 302
   force = true
 
